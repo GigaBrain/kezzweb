@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+{% block title %}Welcome Admin!{% endblock %}
+{% block body %}
+    <div ng-app="loginapp" class="main">
+        <div ng-controller="logincontroller">
+            {{ err }}
+{#            <form action="{% url 'registeration:signup' %}" method="post">#}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h1>Login</h1>
+                <fieldset>
+                    <label for="username">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    <label for="password">{{ form.password.label }}</label>
+                    {{ form.password }}
+                </fieldset>
+                <button ng-click="login()" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

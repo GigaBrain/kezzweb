@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+{% block title %}Signup{% endblock %}
+{% block body %}
+    <div ng-app="signupapp" class="main">
+        <div ng-controller="signupcontroller">
+            {{ err }}
+{#            <form action="{% url 'registeration:signup' %}" method="post">#}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h1>Sign Up</h1>
+                <fieldset>
+                    <label for ="first_name" >{{ form.first_name.label }}</label>
+                    {{ form.first_name }}
+                    <label for ="last_name" >{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                    <label for="email">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    <label for="username">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    <label for="password">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    <label for= "confirm_password">{{ form.confirm_password.label }}</label>
+                    {{ form.confirm_password }}
+                    <div ng-model="user_info.agree">
+                        <input type="checkbox" ng-model="user_info.agree">I agree to all the <a href="#">Terms and Conditions</a> given under the policy
+                    </div>
+                </fieldset>
+                <button ng-click="signup()" type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+

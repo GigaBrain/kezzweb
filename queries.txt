@@ -1,0 +1,72 @@
+##################################################################################################################################################################
+Question: Whats is a decorator in Python ?
+Answer: Decorators provide a simple syntax or a function for calling higher-order functions. 
+		 
+			Higher order functions: In mathematics and computer science, a higher-order function (also functional, functional form or functor) is a function that 	does at least one of the following:
+				1. Takes one or more functions as arguments (i.e., procedural parameters),
+    			2. Returns a function as its result.
+
+		Decorator is a function that takes another function and extends the behavior of the latter function without explicitly modifying it. 
+
+		For Example: 
+			a module MyDecorator with a decorator named as mydecorator
+
+				def mydecorator(some_function):
+					print (statement)
+					def other_function():
+						print (statement 1)
+					some_function()
+					return other_function
+				if __name__=='main':
+					mydecorator()
+
+			in other python file: 
+
+			from MyDecorator import mydecorator
+
+			@mydecorator
+			def some_function():
+				print "Hi"
+
+			Output will be: 
+
+			statement
+			Statement
+			Hi
+
+#################################################################################################################################################################
+
+Question: Difference between {% load static %} and {% load staticfiles %}? 
+Answer: For the moment (Django 1.9 and earlier), {% load staticfiles %} loads the static templatetag from the contrib app that has more features than the built-in 			django.core.static.
+
+		The most important difference is staticfiles can manage files stored on CDN, since its resolver can manage hashes for example. core.static only append STATIC_URL to the static filename, which is not enough if you're processing your files (e.g. adding md5 hash to clear cache between releases)
+
+		This difference is due to the fact that managing non-local storage files was not dedicated to be included in the core package of Django, but was still useful to many developers to be implemented as a official contrib package. So if you started to use staticfiles, you had to remember to use it every in your templates. BUT, some problems could appear, for example when using Media classes so the decision has been to merge those two templatetags into one and use a different behaviour whether the developer has django.contrib.staticfiles in its INSTALLED_APPS or not.
+
+		From Django 1.10 and onwards (also see ticket in Django tracker), the {% load static %} is going to use staticfiles internally if activated (oherwise keep default behaviour), and the templatetag in the contrib package will be deprecated to avoid confusion.
+
+		TL;DR
+
+		    Before Django 1.10: staticfiles loads a templatetags that can manage non-local storage where static can't (or not easily) ;
+		    From Django 1.10: contrib.staticfiles app still exist but its templatetags will be removed only the {% static %} templatetags remains ;
+		    From Django 2.0 (I believe): {% load staticfiles %} is removed.
+
+		For now, use staticfiles templatetags if you use the related contrib app (and you know why you are using it) until Django 1.10, otherwise just use static.
+
+		Link : http://stackoverflow.com/questions/34422971/load-static-and-load-staticfiles-which-is-preferred
+
+##################################################################################################################################################################
+
+Question: Difference between @csrf_exempt and @csrf_protect ?
+Answer: CSRF: Cross Site Request Forgery (CSRF) is a type of attack that occurs when a malicious Web site, email, blog, instant message, or program causes a user's 		Web browser to perform an unwanted action on a trusted site for which the user is currently authenticated.
+
+		@csrf_exempt: It is a decorator. 
+
+####################################################################################################################################################################
+
+Question: Why we use attribute 'for' in semantic label while using HTML ?
+Answer: Initially we use semantic 'label' in HTML to make the field title clickable, for example, it is succeeding a radio button, then it can be selected just by 			clicking its 'label'. 
+		
+		Attribute 'for' is a control id for label. The 'for' attribute specifies which form element a label is bound to. In other words, it specifies the input control that this label is for. This value must be the same as the value in the input control's "id" attribute. 
+
+####################################################################################################################################################################
