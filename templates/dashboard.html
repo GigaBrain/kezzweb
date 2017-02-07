@@ -1,0 +1,11 @@
+{% extends 'template.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+    <div ng-app="homeapp" class="main">
+        <div ng-controller="homecontroller">
+            <button ng-click="logout()" type="submit">Logout</button>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -38,37 +38,37 @@ angular.module("loginapp", [])
          };
          $scope.login=function(){
              var req = {
-                 url: '/dashboard/check_auth',
+                 url: '/dashboard/login',
                  method:'POST',
                  data: $scope.login_info
              }
              $http(req).success( function(response) {
-                 window.alert(response)
+
             })
          }
-         //$scope.signup = function () {
-         //  window.location.href = 'signup';
-         //}
 
      }]);
-//angular.module("homeapp",[])
-//    .controller("homecontroller",['$http','$scope',function($http,$scope){
-//        $scope.logout=function(){
-//            var req = {
-//                url:'/stockportfolio/logout',
-//                method:'POST'
-//            }
-//            $http(req).success(function(response){
-//                window.alert(response);
-//                window.location.href = 'signup';
-//            })
-//            $http(req).error(function(response){
-//                window.alert(response);
-//            })
-//
-//        }
-//
-//    }]);
+
+angular.module("homeapp",[])
+    .controller("homecontroller",['$http','$scope',function($http,$scope){
+        $scope.logout=function(){
+            var req = {
+                url:'/dashboard/logout',
+                method:'POST'
+            }
+            $http(req).success(function(response){
+                if (response=="200"){
+                    window.location.href = "/dashboard/login"
+                }
+
+            })
+            $http(req).error(function(response){
+                window.alert(response);
+            })
+
+        }
+
+    }]);
 
 
 

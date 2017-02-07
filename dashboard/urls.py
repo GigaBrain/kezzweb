@@ -9,8 +9,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 urlpattern= [
     url(r'^login',views.index,name='login'),
     url(r'^home',views.dashboard,name='dashboard'),
-    url(r'^check_auth',views.check_auth,name='auth')
-    # url(r'^subscribe/',views.signup,name='signup'),
+    url(r'^logout',views.subscriber_logout,name = 'logout'),
 
 ]
 urlpatterns = format_suffix_patterns(urlpattern)
