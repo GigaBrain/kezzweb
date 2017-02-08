@@ -30,7 +30,7 @@ def index(request):
                 user.backend = 'mongoengine.django.auth.MongoEngineBackend'
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                request.session.set_expiry(60 * 1)
+                request.session.set_expiry(60*60 * 1)
                 user_id = str(user.pk)
                 if request.POST.has_key('next'):
                     return redirect(request.POST['next'])
@@ -50,14 +50,13 @@ def dashboard(request):
     csrf_dict = {}
     csrf_dict.update(csrf(request))
     host = request.META['HTTP_HOST']
-    return render(request,'dashboard.html')
+    return render(request, 'dashboard_template/template.html')
 
 @csrf_exempt
 def subscriber_logout(request):
     logout(request)
     response = HttpResponse()
     response.content = str(HttpResponse.status_code)
-    print response
     return response
 
 
