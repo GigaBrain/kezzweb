@@ -2,8 +2,8 @@
  * Created by ripundeep on 30/1/16.
  */
 
- angular.module("signupapp", [])
-     .controller("signupcontroller",function($scope,$http) {
+ angular.module("adduserapp", [])
+     .controller("addusercontroller",function($scope,$http) {
          $scope.user_info = {
              'username': null,
              'first_name':null,
@@ -16,12 +16,17 @@
 
          $scope.signup=function(){
              var req = {
-                 url: 'signup',
+                 url: '/dashboard/add_user',
                  method:'POST',
                  data: $scope.user_info
              }
              $http(req).success( function(response) {
-                 window.alert(response);
+                 if (response=="200"){
+                    window.location.href = "/dashboard/home"
+                }
+                 else{
+                     window.location.href = "Failure"
+                 }
             })
          }
          $scope.login = function () {
@@ -49,8 +54,8 @@ angular.module("loginapp", [])
 
      }]);
 
-angular.module("homeapp",[])
-    .controller("homecontroller",['$http','$scope',function($http,$scope){
+angular.module("templateapp",[])
+    .controller("templatecontroller",['$http','$scope',function($http,$scope){
         $scope.logout=function(){
             var req = {
                 url:'/dashboard/logout',
@@ -69,6 +74,28 @@ angular.module("homeapp",[])
         }
 
     }]);
+
+angular.module("containerapp",[])
+    .controller("containercontroller",['$http','$scope',function($http,$scope){
+        $scope.add_user=function(){
+            var req = {
+                url:'/dashboard/logout',
+                method:'POST'
+            }
+            $http(req).success(function(response){
+                if (response=="200"){
+                    window.location.href = "/dashboard/login"
+                }
+
+            })
+            $http(req).error(function(response){
+                window.alert(response);
+            })
+
+        }
+
+    }]);
+
 
 
 

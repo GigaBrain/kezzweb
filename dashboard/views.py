@@ -50,7 +50,7 @@ def dashboard(request):
     csrf_dict = {}
     csrf_dict.update(csrf(request))
     host = request.META['HTTP_HOST']
-    return render(request, 'dashboard_template/template.html')
+    return render(request, 'dashboard_template/dashboard.html')
 
 @csrf_exempt
 def subscriber_logout(request):
@@ -61,22 +61,26 @@ def subscriber_logout(request):
 
 
 
-# @csrf_exempt
-# def signup(request):
-#     signupform = SignupForm()
-#     admin = User()
-#     admin.first_name =  'Admin'
-#     admin.last_name = 'Kezz'
-#     admin.username = 'admin'
-#     admin.set_password('admin@123')
-#     admin.email = 'hundrel@outlook.com'
-#     admin.is_active = True
-#     admin.is_staff = True
-#     admin.is_superuser = True
-#     admin.date_joined = datetime.now()
-#     admin.last_login = datetime.now()
-#     admin.save()
-#     return render(request,'signup.html',{'form':signupform})
+@csrf_exempt
+def add_user(request):
+    signupform = SignupForm()
+    if request.method == 'POST':
+        user = User()
+        user.first_name =  request.POST.get('first_name','')
+        user.last_name = request.POST.get('last_name','')
+        user.username = request.POST.get('username','')
+        user.set_password(request.POST.get('password',''))
+        user.email = request.POST.get('email','')
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = False
+        user.date_joined = datetime.now()
+        user.last_login = datetime.now()
+        user.save()
+        response = str(HttpResponse.status_code)
+        return response
+    else:
+        return render(request, 'dashboard_template/signup.html',{'form':signupform})
 
 
 #125794027

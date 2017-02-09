@@ -1,13 +1,12 @@
-{% extends 'template.html' %}
+{% extends 'dashboard_template/template.html' %}
 {% block title %}Signup{% endblock %}
-{% block body %}
+{% block page_content %}
     <div ng-app="signupapp" class="main">
         <div ng-controller="signupcontroller">
             {{ err }}
 {#            <form action="{% url 'registeration:signup' %}" method="post">#}
-            <form action="" method="post">
+            <form action="" method="post" style="background-color: #438EB9; float: left;">
                 {% csrf_token %}
-                <h1>Sign Up</h1>
                 <fieldset>
                     <label for ="first_name" >{{ form.first_name.label }}</label>
                     {{ form.first_name }}
@@ -21,11 +20,8 @@
                     {{ form.password }}
                     <label for= "confirm_password">{{ form.confirm_password.label }}</label>
                     {{ form.confirm_password }}
-                    <div ng-model="user_info.agree">
-                        <input type="checkbox" ng-model="user_info.agree">I agree to all the <a href="#">Terms and Conditions</a> given under the policy
-                    </div>
                 </fieldset>
-                <button ng-click="signup()" type="submit">Sign Up</button>
+                <button ng-click="signup()" type="submit">Add User</button>
             </form>
         </div>
     </div>
